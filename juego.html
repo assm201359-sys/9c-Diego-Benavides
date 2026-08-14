@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Skate Game</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        canvas {
+            border: 3px solid #ff9900;
+            background: #222;
+        }
+        #info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>SKATE RUNNER - Presiona ESPACIO para Saltar</h2>
+    <canvas id="game" width="600" height="250"></canvas>
+    <div id="info">Puntos: <span id="score">0</span></div>
+
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+
+        let score = 0;
+        let gameOver = false;
+
+        const skater = {
+            x: 50,
+            y: 180,
+            w: 30,
+            h: 30,
+            vy: 0,
+            gravity: 0.8,
+            jumpPower: -12,
+            grounded: true
+        };
+
+        const obstacle = {
+            x: 600,
+            y: 190,
+            w: 20,
+            h: 20,
+            speed: 6
+        };
+
+        function jump() {
+            if (skater.grounded) {
+                skater.vy = skater.jumpPower;
+                skater.grounded = false;
+            } else if (gameOver) {
+                // Reiniciar juego
+                skater.y = 180;
+                obstacle.x = 600;
+                score = 0;
+                gameOver = false;
+                loop();
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowUp') {
+                e.preventDefault();
+                jump();
+            }
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            jump();
+        });
+
+        function update() {
+            // Físicas del Skater
+            skater.vy += skater.gravity;
+            skater.y += skater.vy;
+
+            if (skater.y >= 180) {
+                skater.y = 180;
+                skater.vy = 0;
+                skater.grounded = true;
+            }
+
+            // Movimiento del Obstáculo
+            obstacle.x -= obstacle.speed;
+            if (obstacle.x + obstacle.w < 0) {
+                obstacle.x = 600;
+                score += 10;
+                document.getElementById('score').innerText = score;
+            }
+
+            // Colisión
+            if (
+                skater.x < obstacle.x + obstacle.w &&
+                skater.x + skater.w > obstacle.x &&
+                skater.y < obstacle.y + obstacle.h &&
+                skater.y + skater.h > obstacle.y
+            ) {
+                gameOver = true;
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Suelo
+            ctx.fillStyle = '#555';
+            ctx.fillRect(0, 210, canvas.width, 40);
+
+            // Skater (Cuadro Azul con rueda)
+            ctx.fillStyle = '#00d2ff';
+            ctx.fillRect(skater.x, skater.y, skater.w, skater.h);
+            ctx.fillStyle = '#ff9900';
+            ctx.fillRect(skater.x - 5, skater.y + 25, skater.w + 10, 5); // Tabla
+
+            // Obstáculo (Cuadro Rojo)
+            ctx.fillStyle = '#ff4444';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
+
+            // Mensaje de Game Over
+            if (gameOver) {
+                ctx.fillStyle = 'white';
+                ctx.font = '24px sans-serif';
+                ctx.fillText('¡PERDISTE! Presiona Espacio', 140, 110);
+            }
+        }
+
+        function loop() {
+            if (!gameOver) {
+                update();
+                draw();
+                requestAnimationFrame(loop);
+            } else {
+                draw();
+            }
+        }
+
+        loop();
+    </script>
+</body>
+</html>
