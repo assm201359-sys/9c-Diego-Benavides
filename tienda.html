@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<title>Tienda Skate Monster</title>
+
+<style>
+
+body{
+    background:linear-gradient(#111,#222);
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    color:#39ff14;
+    text-shadow:0 0 20px #39ff14;
+}
+
+.monedas{
+    font-size:25px;
+    color:yellow;
+    margin:20px;
+}
+
+.tienda{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.item{
+
+    background:#333;
+    border:3px solid #39ff14;
+    border-radius:20px;
+    width:220px;
+    margin:15px;
+    padding:20px;
+    box-shadow:0 0 15px #39ff14;
+
+}
+
+
+button{
+
+    background:#39ff14;
+    border:none;
+    padding:12px 20px;
+    border-radius:30px;
+    font-weight:bold;
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+background:white;
+
+}
+
+
+a{
+
+color:#39ff14;
+font-size:20px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>🏪 TIENDA SKATE 🛹</h1>
+
+
+<div class="monedas">
+
+🪙 Puntos disponibles:
+<span id="puntos"></span>
+
+</div>
+
+
+
+<div class="tienda">
+
+
+
+<div class="item">
+
+<h2>🛹 Tabla Azul</h2>
+
+<p>Mejora velocidad</p>
+
+<h3>100 puntos</h3>
+
+<button onclick="comprar('Tabla Azul',100)">
+Comprar
+</button>
+
+</div>
+
+
+
+
+<div class="item">
+
+<h2>🔥 Tabla Fuego</h2>
+
+<p>Más velocidad</p>
+
+<h3>250 puntos</h3>
+
+<button onclick="comprar('Tabla Fuego',250)">
+Comprar
+</button>
+
+</div>
+
+
+
+
+
+<div class="item">
+
+<h2>⚡ Ruedas Turbo</h2>
+
+<p>Saltos más altos</p>
+
+<h3>300 puntos</h3>
+
+<button onclick="comprar('Ruedas Turbo',300)">
+Comprar
+</button>
+
+</div>
+
+
+
+
+
+<div class="item">
+
+<h2>👕 Ropa Pro</h2>
+
+<p>Estilo profesional</p>
+
+<h3>150 puntos</h3>
+
+<button onclick="comprar('Ropa Pro',150)">
+Comprar
+</button>
+
+</div>
+
+
+
+</div>
+
+
+<br><br>
+
+
+<a href="index.html">
+⬅ Volver al menú
+</a>
+
+
+
+
+<script>
+
+
+let puntos = Number(localStorage.getItem("puntos") || 0);
+
+
+document.getElementById("puntos").innerHTML=puntos;
+
+
+
+
+function comprar(objeto,precio){
+
+
+if(puntos>=precio){
+
+
+puntos-=precio;
+
+
+localStorage.setItem("puntos",puntos);
+
+
+
+let inventario =
+JSON.parse(localStorage.getItem("inventario")) || [];
+
+
+
+inventario.push(objeto);
+
+
+
+localStorage.setItem(
+"inventario",
+JSON.stringify(inventario)
+);
+
+
+
+alert(
+"✅ Compraste: "+objeto
+);
+
+
+
+document.getElementById("puntos").innerHTML=puntos;
+
+
+
+}else{
+
+
+alert(
+"❌ No tienes suficientes puntos"
+);
+
+
+}
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
