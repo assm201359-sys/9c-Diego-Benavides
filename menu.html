@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Menú Skate Life</title>
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+body{
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.75),
+rgba(0,0,0,.75)
+),
+
+url("https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?auto=format&fit=crop&w=1600&q=80");
+
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+color:white;
+
+}
+
+
+
+
+header{
+
+background:rgba(0,0,0,.85);
+
+padding:25px;
+
+text-align:center;
+
+border-bottom:3px solid #39FF14;
+
+}
+
+
+
+header h1{
+
+font-size:55px;
+
+color:#39FF14;
+
+text-shadow:
+0 0 15px #39FF14,
+0 0 40px #39FF14;
+
+letter-spacing:5px;
+
+}
+
+
+
+
+.contenedor{
+
+
+width:90%;
+
+margin:50px auto;
+
+text-align:center;
+
+
+}
+
+
+
+
+.saludo{
+
+
+background:rgba(0,0,0,.8);
+
+padding:25px;
+
+border-radius:25px;
+
+border:2px solid #39FF14;
+
+box-shadow:0 0 25px #39FF14;
+
+margin-bottom:40px;
+
+
+}
+
+
+
+.saludo h2{
+
+font-size:35px;
+
+color:#39FF14;
+
+}
+
+
+
+.saludo p{
+
+font-size:20px;
+
+}
+
+
+
+
+.menu{
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+
+
+.tarjeta{
+
+
+width:250px;
+
+height:230px;
+
+
+background:rgba(0,0,0,.85);
+
+
+border-radius:25px;
+
+
+border:3px solid #39FF14;
+
+
+padding:30px;
+
+
+box-shadow:0 0 20px #39FF14;
+
+
+transition:.4s;
+
+
+}
+
+
+
+
+.tarjeta:hover{
+
+
+transform:translateY(-15px) scale(1.05);
+
+
+box-shadow:
+
+0 0 40px #39FF14;
+
+
+}
+
+
+
+
+
+.tarjeta h3{
+
+
+font-size:28px;
+
+color:#39FF14;
+
+margin-bottom:20px;
+
+
+}
+
+
+
+
+.tarjeta p{
+
+font-size:16px;
+
+line-height:1.5;
+
+}
+
+
+
+
+
+button{
+
+
+background:#39FF14;
+
+color:black;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-top:15px;
+
+transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+background:white;
+
+transform:scale(1.1);
+
+box-shadow:0 0 20px white;
+
+
+}
+
+
+
+
+
+.skater{
+
+
+position:absolute;
+
+right:40px;
+
+bottom:20px;
+
+opacity:.8;
+
+}
+
+
+
+.skater img{
+
+
+width:180px;
+
+filter:drop-shadow(0 0 15px #39FF14);
+
+
+}
+
+
+
+footer{
+
+
+margin-top:50px;
+
+color:#39FF14;
+
+font-size:18px;
+
+
+}
+
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<header>
+
+<h1>
+🛹 SKATE LIFE 🛹
+</h1>
+
+</header>
+
+
+
+
+
+<div class="contenedor">
+
+
+
+
+
+<div class="saludo">
+
+
+<h2 id="nombre">
+Bienvenido Skater
+</h2>
+
+
+<p>
+Prepárate para superar retos, ganar puntos y convertirte en una leyenda del skate.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="menu">
+
+
+
+
+
+<div class="tarjeta">
+
+<h3>🎮 Juego</h3>
+
+<p>
+
+Enfrenta monstruos,
+supera niveles y consigue
+el mayor puntaje.
+
+</p>
+
+
+<button onclick="location.href='juego.html'">
+
+Jugar
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="tarjeta">
+
+<h3>📖 Diario</h3>
+
+<p>
+
+Escribe tus experiencias,
+trucos aprendidos y aventuras.
+
+</p>
+
+
+<button onclick="location.href='diario.html'">
+
+Entrar
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="tarjeta">
+
+<h3>✅ Tareas</h3>
+
+<p>
+
+Organiza tus objetivos
+como un verdadero skater.
+
+</p>
+
+
+<button onclick="location.href='tareas.html'">
+
+Ver tareas
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="tarjeta">
+
+<h3>🏆 Ranking</h3>
+
+<p>
+
+Mira tus puntos y demuestra
+quién es el mejor skater.
+
+</p>
+
+
+<button onclick="verPuntos()">
+
+Ver puntos
+
+</button>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="skater">
+
+<img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?auto=format&fit=crop&w=500&q=80">
+
+</div>
+
+
+
+
+<footer>
+
+🔥 La calle es tu pista, los trucos son tu historia 🔥
+
+</footer>
+
+
+
+
+
+
+<script>
+
+
+let usuario=localStorage.getItem("nombre");
+
+
+if(usuario){
+
+document.getElementById("nombre").innerHTML=
+"🔥 Bienvenido "+usuario+" 🔥";
+
+}
+
+
+
+
+function verPuntos(){
+
+
+let puntos=localStorage.getItem("puntaje");
+
+
+if(puntos){
+
+alert(
+"🏆 Tu puntaje actual es: "+puntos+" puntos"
+);
+
+
+}else{
+
+
+alert(
+"Aún no tienes puntos. Juega primero."
+);
+
+
+}
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
